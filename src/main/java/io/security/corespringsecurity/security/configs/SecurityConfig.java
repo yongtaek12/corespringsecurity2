@@ -10,6 +10,7 @@ import io.security.corespringsecurity.security.metadatasource.UrlFilterInvocatio
 import io.security.corespringsecurity.security.provider.AjaxAuthenticationProvider;
 import io.security.corespringsecurity.security.provider.FormAuthenticationProvider;
 import io.security.corespringsecurity.security.service.SecurityResourceService;
+import io.security.corespringsecurity.voter.IpAccessVoter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,6 +165,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<AccessDecisionVoter<?>> getAccessDecisionVoters() {
 
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
+        accessDecisionVoters.add(new IpAccessVoter(securityResourceService));
+
         accessDecisionVoters.add(roleVoter());
 
         return accessDecisionVoters;
