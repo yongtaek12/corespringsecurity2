@@ -91,8 +91,11 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Secured("ROLE_USER")
+    @Override
+    @Secured("ROLE_MANAGER")
     public void order(){
         System.out.println("order");
     }
+
+
 }
